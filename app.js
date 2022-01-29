@@ -35,7 +35,11 @@ const game = {
   
     getGuess: function(){
       //let guess
+
+      //weird bug if a user enters a NaN than the right answer it seems like it accepts it but doesn't actually check if it == secrectNum
       game.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum} answer ${this.secretNum}`))
+      console.log(game.guess)
+      console.log (typeof game.guess)
       
       if (game.guess !== NaN && game.guess >= this.smallestNum && game.guess <= this.biggestNum){
       //right here insert the push method maybe?
@@ -47,13 +51,14 @@ const game = {
     },
 
     getInput: function(){
-      game.biggestNum = parseInt(prompt(`Set the biggest number possible`))
-      game.smallestNum = parseInt(prompt(`Set the smallest number possible`))
-      if (game.biggestNum !== NaN && game.smallestNum !== NaN){
-        return 
+      game.biggestNum = Number(window.prompt(`Set the biggest number possible`))
+      game.smallestNum = Number(window.prompt(`Set the smallest number possible`))
+      console.log(typeof game.biggestNum)
+      if (typeof game.biggestNum !== Number || typeof game.smallestNum !== Number){
+        return console.log(`is a number`)
       }else{
         window.alert(`Not a valid input try again`)
-        this.getInput()
+        game.getInput()
       }
       
     },
